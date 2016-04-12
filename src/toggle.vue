@@ -1,7 +1,7 @@
 // out: ..
 <template lang="jade">
 button(@click="toggle | notPrevented | prevent",:class="[isOn ? onClass : offClass]")
-  slot
+  slot Toggle
   slot(name="on" v-if="isOn")
   slot(name="off" v-else)
 </template>
