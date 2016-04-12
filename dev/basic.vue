@@ -1,6 +1,6 @@
 <template lang="jade">
 .container
-  a(href="https://github.com/vue-comps/vue-parallax/blob/master/dev/basic.vue") source
+  a(href="https://github.com/vue-comps/vue-toggle/blob/master/dev/basic.vue") source
   toggle(:is-on.sync="isOn") click to switch
     span(slot="on")  off
     span(slot="off")  on
