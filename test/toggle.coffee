@@ -1,5 +1,6 @@
 env = null
 el = null
+disable = null
 click = (el) ->
   e = new MouseEvent("click",{
     "view": window,
@@ -15,6 +16,7 @@ describe "toggle", ->
     before ->
       env = loadComp(require("../dev/basic.vue"))
       el = env.$refs.toggle.$el
+      disable = env.$refs.disable.$el
       onSpy = chai.spy()
       offSpy = chai.spy()
       env.onOn = onSpy
@@ -50,4 +52,13 @@ describe "toggle", ->
         click(el)
         env.$nextTick ->
           el.should.have.text("ab")
+          done()
+
+    it "should disable", (done) ->
+      click(disable)
+      env.$nextTick ->
+        el.should.have.attr("disabled")
+        click(disable)
+        env.$nextTick ->
+          el.should.not.have.attr("disabled")
           done()

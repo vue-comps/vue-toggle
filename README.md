@@ -36,6 +36,7 @@ For examples see [`dev/`](dev/).
 | is-on | Boolean | false | (two-way) toggle state |
 | on-class | String | "on" | class of button when on |
 | off-class | String | "off" | class of button when off |
+| disabled | Boolean | false | is disabled |
 
 #### Events
 | Name |  description |

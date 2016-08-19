@@ -1,6 +1,6 @@
 // out: ..
 <template lang="pug">
-button(@click="toggle",v-bind:class="computedClass")
+button(@click="toggle",v-bind:class="computedClass",v-bind:disabled="disabled")
   slot Toggle:
   slot(name="on" v-if="isOn")  on
   slot(name="off" v-else)  off
@@ -12,6 +12,8 @@ module.exports =
     require("vue-mixins/class")
   ]
   props:
+    class:
+      default: -> []
     onClass:
       type: String
       default: "on"
@@ -19,6 +21,9 @@ module.exports =
       type: String
       default: "off"
     isOn:
+      type: Boolean
+      default: false
+    disabled:
       type: Boolean
       default: false
   computed:
