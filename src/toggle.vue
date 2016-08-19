@@ -1,18 +1,16 @@
 // out: ..
-<template lang="jade">
-button(@click="toggle | notPrevented | prevent",:class="[isOn ? onClass : offClass]")
-  slot Toggle
-  slot(name="on" v-if="isOn")
-  slot(name="off" v-else)
+<template lang="pug">
+button(@click="toggle",v-bind:class="computedClass")
+  slot Toggle:
+  slot(name="on" v-if="isOn")  on
+  slot(name="off" v-else)  off
 </template>
 
 <script lang="coffee">
 module.exports =
-
-  filters:
-     notPrevented: require("vue-filters/notPrevented")
-     prevent: require("vue-filters/prevent")
-
+  mixins: [
+    require("vue-mixins/class")
+  ]
   props:
     onClass:
       type: String
@@ -23,14 +21,19 @@ module.exports =
     isOn:
       type: Boolean
       default: false
+  computed:
+    mergeClass: ->
+      return if @isOn then [@onClass] else [@offClass]
 
   methods:
-    toggle: ->
+    toggle: (e) ->
+      return if e? and e.defaultPrevented
+      e?.preventDefault?()
       if @isOn
-        @$emit("off")
+        @$emit("off",e)
       else
-        @$emit("on")
-      @$emit("toggle")
+        @$emit("on",e)
+      @$emit("toggle",e)
       @isOn = !@isOn
 
 </script>

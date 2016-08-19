@@ -1,23 +1,26 @@
-<template lang="jade">
+<template lang="pug">
 .container
+  toggle(v-bind:is-on.sync="isOn",v-ref:toggle,@on="onOn",@off="onOff")
+    span(v-if="content") {{content}}
+    span(v-if="contentOn" slot="on") {{contentOn}}
+    span(v-if="contentOff" slot="off") {{contentOff}}
+  br
+  span isOn: {{isOn}}
+  br
+  br
   a(href="https://github.com/vue-comps/vue-toggle/blob/master/dev/basic.vue") source
-  toggle(:is-on.sync="isOn") click to switch
-    span(slot="on")  off
-    span(slot="off")  on
-  span  isOn: {{isOn}}
 </template>
 
 <script lang="coffee">
 module.exports =
   data: ->
     isOn: false
+    content: ""
+    contentOn: ""
+    contentOff: ""
   components:
     "toggle": require "../src/toggle.vue"
+  methods:
+    onOn: ->
+    onOff: ->
 </script>
-
-<style lang="stylus">
-.container > a
-  position absolute
-  left 250px
-  top 40px
-</style>
