@@ -1,3 +1,5 @@
+# DEPRECATED
+
 # vue-toggle
 
 A toggle button for simple state management.
